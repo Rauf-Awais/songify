@@ -1,23 +1,23 @@
-package se.distansakademin.songify.models;
+package com.example.songify.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-public class Songs {
+public class SongWriter {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String songId;
-    private String songName;
-    private String songType;
-
-
+    private String Id;
+    private String Name;
+    private String dateOfBirth;
+    private int email;
 }

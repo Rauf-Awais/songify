@@ -1,4 +1,4 @@
-package se.distansakademin.songify;
+package com.example.songify;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
