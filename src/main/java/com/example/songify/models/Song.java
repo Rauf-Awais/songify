@@ -1,9 +1,6 @@
 package com.example.songify.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -18,5 +15,7 @@ public class Song {
     private String type;
     private int length;
 
+    @ManyToOne
+    private Writer songWriter;
 
 }

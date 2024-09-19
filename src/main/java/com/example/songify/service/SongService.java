@@ -15,7 +15,7 @@ public class SongService {
     private final SongRepository repository;
 
     public boolean createSong(Song song) {
-        System.out.println("Executing database query...");
+
         try {
             repository.save(song);
             return true;

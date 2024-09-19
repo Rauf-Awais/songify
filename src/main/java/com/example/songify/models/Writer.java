@@ -1,23 +1,26 @@
 package com.example.songify.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SongWriter {
+public class Writer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String Id;
     private String Name;
     private String dateOfBirth;
-    private int email;
+    private String email;
+
+    @OneToMany(mappedBy = "songWriter" , cascade = CascadeType.ALL)
+    private List<Song> songs;
+    
 }
