@@ -7,15 +7,19 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Getter
+@Setter
+@ToString
 public class Song {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
     private String title;
     private String type;
     private int length;
 
     @ManyToOne
-    private Writer songWriter;
+    private Writer writer;
+
 
 }

@@ -1,6 +1,7 @@
 package com.example.songify.controllers;
 
 
+import com.example.songify.DTO.WriterDTO;
 import com.example.songify.models.Song;
 import com.example.songify.models.Writer;
 import com.example.songify.service.WriterService;
@@ -17,10 +18,10 @@ public class WriterController {
     private final WriterService service;
 
     @PostMapping
-    public ResponseEntity<String> createWriter(@RequestBody Writer writer){
+    public ResponseEntity<String> createWriter(@RequestBody WriterDTO requestBody){
+        boolean isCreated = service.createWriter(requestBody);
 
-        var created = service.createWriter(writer);
-        if(created){
+        if(isCreated){
             return new ResponseEntity<>(" Writer Data created successfully" , HttpStatus.CREATED);
         }
         else {
@@ -28,13 +29,13 @@ public class WriterController {
         }
     }
     @GetMapping
-    public ResponseEntity<Iterable<Writer>> getAllWriters(){
+    public ResponseEntity<Iterable<WriterDTO>> getAllWriters(){
         var writers = service.getAllWriters();
         return new ResponseEntity<>(writers, HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Writer> getWriterByID(@PathVariable String id){
+    public ResponseEntity<Writer> getWriterByID(@PathVariable Long id){
         var writer = service.getWriterById(id);
         if (writer.isPresent()){
             return new ResponseEntity<>(writer.get(), HttpStatus.OK);
@@ -44,7 +45,7 @@ public class WriterController {
         }
     }
     @PutMapping("{id}")
-    public ResponseEntity<String> updateWriter(@PathVariable String id, @RequestBody Writer writer ){
+    public ResponseEntity<String> updateWriter(@PathVariable Long id, @RequestBody Writer writer ){
         var isUpdated = service.updateWriter(id,writer);
         if (isUpdated){
             return new ResponseEntity<>("Writer Updated through Id ", HttpStatus.OK);
@@ -54,7 +55,7 @@ public class WriterController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteWriter(@PathVariable String id){
+    public ResponseEntity<String> deleteWriter(@PathVariable Long id){
         var isDeleted = service.deleteById(id);
         if (isDeleted){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -1,11 +1,13 @@
 package com.example.songify.service;
 
+import com.example.songify.DTO.WriterDTO;
 import com.example.songify.models.Song;
 import com.example.songify.models.Writer;
 import com.example.songify.repositories.WriterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -14,24 +16,30 @@ public class WriterService {
 
     private final WriterRepository repository;
 
-    public boolean createWriter(Writer writer) {
+    public boolean createWriter(WriterDTO dto) {
           try {
-            repository.save(writer);
+            repository.save(dto.toWriter());
             return true;
         } catch (Exception e) {
             return false;
         }
 
     }
-    public Iterable<Writer> getAllWriters() {
-
-        return repository.findAll();
+    public Iterable<WriterDTO> getAllWriters() {
+        var writers = repository.findAll();
+        var writerDTOs = new ArrayList<WriterDTO>();
+        for (var writer : writers){
+            var writerDTO = new WriterDTO(writer);
+            writerDTOs.add(writerDTO);
     }
-    public Optional<Writer> getWriterById(String id) {
+
+        return writerDTOs;
+    }
+    public Optional<Writer> getWriterById(Long id) {
         return repository.findById(id);
     }
 
-    public boolean updateWriter(String id, Writer updateWriter) {
+    public boolean updateWriter(Long id, Writer updateWriter) {
         Optional<Writer> existingWriter = repository.findById(id);
         if (existingWriter.isPresent()) {
             Writer writer = existingWriter.get();
@@ -45,7 +53,7 @@ public class WriterService {
             return false;
         }
     }
-    public boolean deleteById(String id){
+    public boolean deleteById(Long id){
         try {
             repository.deleteById(id);
             return true;

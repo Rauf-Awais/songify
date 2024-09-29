@@ -27,11 +27,11 @@ public class SongService {
     public Iterable<Song> getAllSongs() {
         return repository.findAll();
     }
-    public Optional<Song> getSongById(String id) {
+    public Optional<Song> getSongById(Long id) {
         return repository.findById(id);
     }
 
-    public boolean updateSong(String id, Song updateSong) {
+    public boolean updateSong(Long id, Song updateSong) {
         Optional<Song> existingSong = repository.findById(id);
         if (existingSong.isPresent()) {
             Song song = existingSong.get();
@@ -45,7 +45,7 @@ public class SongService {
             return false;
         }
     }
-    public boolean deleteById(String id){
+    public boolean deleteById(Long id){
         try {
             repository.deleteById(id);
             return true;

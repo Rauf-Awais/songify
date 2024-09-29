@@ -14,13 +14,14 @@ import java.util.List;
 public class Writer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
     private String Name;
     private String dateOfBirth;
     private String email;
 
-    @OneToMany(mappedBy = "songWriter" , cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "writer" , cascade = CascadeType.ALL)
     private List<Song> songs;
-    
+
+
 }

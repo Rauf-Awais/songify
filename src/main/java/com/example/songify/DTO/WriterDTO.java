@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class WriterDTO {
 
-    private String id;
+    private Long id;
     private String name;
     private String dateOfBirth;
     private String email;

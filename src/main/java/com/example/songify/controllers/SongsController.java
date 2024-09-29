@@ -30,7 +30,7 @@ public class SongsController {
         return new ResponseEntity<>(songs, HttpStatus.OK);
     }
     @GetMapping("{id}")
-    public ResponseEntity<Song> getSongByID(@PathVariable String id){
+    public ResponseEntity<Song> getSongByID(@PathVariable Long id){
         var song = service.getSongById(id);
         if (song.isPresent()){
             return new ResponseEntity<>(song.get(), HttpStatus.OK);
@@ -40,7 +40,7 @@ public class SongsController {
         }
     }
     @PutMapping("{id}")
-    public ResponseEntity<String> updateSong(@PathVariable String id, @RequestBody Song song ){
+    public ResponseEntity<String> updateSong(@PathVariable Long id, @RequestBody Song song ){
         var isUpdated = service.updateSong(id,song);
         if (isUpdated){
             return new ResponseEntity<>("Song Updated ", HttpStatus.OK);
@@ -50,7 +50,7 @@ public class SongsController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteSong(@PathVariable String id){
+    public ResponseEntity<String> deleteSong(@PathVariable Long id){
         var isDeleted = service.deleteById(id);
         if (isDeleted){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
