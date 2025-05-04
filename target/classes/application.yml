@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: songify
+  datasource:
+    username: "root"
+    password: "Lahore123"
+    url: jdbc:mysql://localhost:3306/songify
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  security:
+    oauth2:
+      client:
+        registration:
+          cognito:
+            clientId: 2ni0p9938m41uq4l7ivpr5a62v
+            clientSecret: 1633rifoumd9qeocb5bghuqgq2h298trhg3lbbjp1lv53rjbv2hm
+            scope: openid
+            redirect-uri: https://13.50.70.103:8080/login/oauth2/code/cognito
+            clientName: songify-app-client
+        provider:
+          cognito:
+            issuerUri: https://cognito-idp.eu-north-1.amazonaws.com/eu-north-1_K2zosTdYS
+            user-name-attribute: username
